@@ -7,21 +7,17 @@ import { removeTodo } from "../actions";
 
 
 const Picsum = () => {
-const [{ todos, filter }, dispatch] = useStore();
+const [{ todos }, dispatch] = useStore();
 
     return (
         <View style={styles.container}>
           <Text>Picsum test</Text>
           {todos.map((val, index) => (
-              <View key={index}><Text>{val.name}</Text>
-              <TouchableHighlight onPress = {() => { dispatch(removeTodo(val)) } }>
-              <View>
-              <Text>
-              remove
-              </Text>
-              </View>
-          </TouchableHighlight>
-          </View>))}
+            <View key={index}><Text>{val.name}</Text>
+                <TouchableHighlight onPress = {() => { dispatch(removeTodo(val)) } }>
+                    <Text>remove</Text>
+                </TouchableHighlight>
+            </View>))}
           <StatusBar style="auto" />
         </View>
     );
