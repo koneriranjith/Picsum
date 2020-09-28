@@ -1,4 +1,5 @@
-import * as todo from './todo';
+// images reducer
+import * as images from './images';
 import * as types from '../actions/types';
 
 const createReducer = handlers => (state, action) => {
@@ -10,9 +11,5 @@ const createReducer = handlers => (state, action) => {
 };
 
 export default createReducer({
-  [types.ADD_TODO]: todo.add,
-  [types.REMOVE_TODO]: todo.remove,
-  [types.UPDATE_TODO]: todo.update,
-  [types.FILTER_TODO]: todo.filter,
-  [types.SHOW_STATE]: todo.showState,
+  [types.SET_IMAGES_STATE]: images.setImages,
 });
