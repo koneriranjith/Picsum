@@ -1,3 +1,7 @@
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
 export const getImages = ({limit, page}) => {
     return fetch(`https://picsum.photos/v2/list?page=${page}&limit=${limit}`).then((response)=>{
         if (response.status !== 200) {
@@ -7,7 +11,8 @@ export const getImages = ({limit, page}) => {
         }
 
         return response.json().then(function(data) {
-           return data
+           // shuffle function will always suffle the responce data
+           return shuffle(data)
         });
     })
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {View} from 'react-native'
+import {View, RefreshControl, ScrollView} from 'react-native'
 import Carousel from '../components/Carousel/index.js'
 
 import { getImages } from '../services/list'
@@ -8,6 +8,7 @@ import { setImages } from "../actions";
 
 const Home = () => {
 const [pagination, setPagination] = useState({page: 1, limit: 10});
+const [refresh, setRefresh] = useState(false);
 const [{ images }, dispatch] = useStore();
 
     useEffect(()=> {
@@ -31,9 +32,28 @@ const [{ images }, dispatch] = useStore();
         setPagination({...pagination, page})
     }
 
+    const refreshList = async () => {
+        setRefresh(true)
+        getImages({limit: 10, page: 1}).then( (data) => {
+            dispatch(setImages(data))
+            setRefresh(false)
+        }).catch(()=> {
+            setRefresh(false)
+        })
+    }
+
     return (
-        <View style={{marginTop: 30}}>
+        <ScrollView 
+            style={{marginTop: 35}}
+            refreshControl={
+                <RefreshControl
+                    onRefresh={() => refreshList()}
+                    refreshing={refresh}
+                />
+            }
+        >
             <Carousel
+                key={refresh}
                 horizontal={true}
                 pagingEnabled={true}
                 scrollEnabled={true}
@@ -45,7 +65,7 @@ const [{ images }, dispatch] = useStore();
                 showsHorizontalScrollIndicatorLimit={10}
                 data={images} 
                 onEndReached={() => { onEndReached() }} />
-        </View>
+    </ScrollView>
     )
 }
 

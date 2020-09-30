@@ -3,9 +3,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
-  StyleSheet,
-  Platform,
+  Image
 } from "react-native";
 
 const ImageItem = ({ item }) => {
