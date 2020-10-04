@@ -13,6 +13,8 @@ export const getImages = ({limit, page}) => {
         return response.json().then(function(data) {
            // shuffle function will always suffle the responce data
            return shuffle(data)
-        });
+        }).catch((error)=>{
+            alert("error : ", JSON.stringify(error))
+        })
     })
 }

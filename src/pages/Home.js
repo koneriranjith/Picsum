@@ -47,7 +47,7 @@ const [{ images }, dispatch] = useStore();
             style={{marginTop: 35}}
             refreshControl={
                 <RefreshControl
-                    onRefresh={() => refreshList()}
+                    onRefresh={() => {refreshList()}}
                     refreshing={refresh}
                 />
             }
